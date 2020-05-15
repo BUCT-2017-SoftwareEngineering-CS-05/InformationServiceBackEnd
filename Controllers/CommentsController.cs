@@ -11,48 +11,48 @@ namespace InformationServiceBackEnd.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class CommentsController : ControllerBase
     {
-        private readonly UserContext _context;
+        private readonly CommentContext _context;
 
-        public UsersController(UserContext context)
+        public CommentsController(CommentContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Comments
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        public async Task<ActionResult<IEnumerable<Comment>>> GetComment()
         {
-            return await _context.User.ToListAsync();
+            return await _context.Comment.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/Comments/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(string id)
+        public async Task<ActionResult<Comment>> GetComment(int id)
         {
-            var user = await _context.User.FindAsync(id);
+            var comment = await _context.Comment.FindAsync(id);
 
-            if (user == null)
+            if (comment == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return comment;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Comments/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(string id, User user)
+        public async Task<IActionResult> PutComment(int id, Comment comment)
         {
-            if (id != user.userid)
+            if (id != comment.midex)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(comment).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace InformationServiceBackEnd.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!CommentExists(id))
                 {
                     return NotFound();
                 }
@@ -73,20 +73,20 @@ namespace InformationServiceBackEnd.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Comments
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<Comment>> PostComment(Comment comment)
         {
-            _context.User.Add(user);
+            _context.Comment.Add(comment);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (UserExists(user.userid))
+                if (CommentExists(comment.midex))
                 {
                     return Conflict();
                 }
@@ -96,28 +96,28 @@ namespace InformationServiceBackEnd.Controllers
                 }
             }
 
-            return CreatedAtAction("GetUser", new { id = user.userid }, user);
+            return CreatedAtAction("GetComment", new { id = comment.midex }, comment);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Comments/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(string id)
+        public async Task<ActionResult<Comment>> DeleteComment(int id)
         {
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
+            var comment = await _context.Comment.FindAsync(id);
+            if (comment == null)
             {
                 return NotFound();
             }
 
-            _context.User.Remove(user);
+            _context.Comment.Remove(comment);
             await _context.SaveChangesAsync();
 
-            return user;
+            return comment;
         }
 
-        private bool UserExists(string id)
+        private bool CommentExists(int id)
         {
-            return _context.User.Any(e => e.userid == id);
+            return _context.Comment.Any(e => e.midex == id);
         }
     }
 }

@@ -7,8 +7,9 @@ namespace InformationServiceBackEnd.Models
 {
     public class User
     {
-        public string UserId { get; set; }
-        public string NickName { get; set; }
-        public string UserPassword { get; set; }
+        public string userid { get; set; }
+        public string nickname { get; set; }
+        public string userpwd { get; set; }
+        public int coright { get; set; }
     }
 }
