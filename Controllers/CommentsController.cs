@@ -27,16 +27,23 @@ namespace InformationServiceBackEnd.Controllers
             return await _context.Comment.ToListAsync();
         }
 
-        // GET: api/Comments/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Comment>> GetComment(int id)
+        // GET: api/Comments/userid/{userid}
+        [HttpGet("userid/{id}")]
+        public async Task<ActionResult<IEnumerable<Comment>>> GetByUserid(string id)
         {
-            var comment = await _context.Comment.FindAsync(id);
+            var comment = await _context.Comment
+                                .Where(b => b.userid == id)
+                                .ToListAsync();
 
-            if (comment == null)
-            {
-                return NotFound();
-            }
+            return comment;
+        }
+        // GET: api/Comments/midex/{midex}
+        [HttpGet("midex/{id:int}")]
+        public async Task<ActionResult<IEnumerable<Comment>>> GetByMidex(int id)
+        {
+            var comment = await _context.Comment
+                                .Where(b => b.midex == id)
+                                .ToListAsync();
 
             return comment;
         }
