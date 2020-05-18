@@ -37,6 +37,7 @@ namespace InformationServiceBackEnd.Controllers
 
             return comment;
         }
+
         // GET: api/Comments/midex/{midex}
         [HttpGet("midex/{id:int}")]
         public async Task<ActionResult<IEnumerable<Comment>>> GetByMidex(int id)

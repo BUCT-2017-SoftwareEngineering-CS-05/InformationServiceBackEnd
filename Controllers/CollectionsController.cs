@@ -41,6 +41,17 @@ namespace InformationServiceBackEnd.Controllers
             return collection;
         }
 
+        // GET: api/Collections/midex/5
+        [HttpGet("midex/{id}")]
+        public async Task<ActionResult<IEnumerable<Collection>>> GetByUserid(int id)
+        {
+            var collection = await _context.Collection
+                                .Where(b => b.midex == id)
+                                .ToListAsync();
+
+            return collection;
+        }
+
         // PUT: api/Collections/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
