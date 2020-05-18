@@ -29,6 +29,10 @@ namespace InformationServiceBackEnd
         {
             services.AddDbContext<UserContext>(opt =>opt.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<CommentContext>(opt => opt.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<Museum_InformationContext>(opt => opt.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<maintableContext>(opt => opt.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<CollectionContext>(opt => opt.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ExhibitionContext>(opt => opt.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
         }
 
