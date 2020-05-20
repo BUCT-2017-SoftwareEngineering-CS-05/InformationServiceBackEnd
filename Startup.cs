@@ -34,6 +34,7 @@ namespace InformationServiceBackEnd
             services.AddDbContext<CollectionContext>(opt => opt.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<ExhibitionContext>(opt => opt.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<EducationContext>(opt => opt.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<NewsContext>(opt => opt.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
         }
 
