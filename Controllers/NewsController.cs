@@ -14,10 +14,11 @@ namespace InformationServiceBackEnd.Controllers
     public class NewsController : ControllerBase
     {
         private readonly NewsContext _context;
-
-        public NewsController(NewsContext context)
+        private readonly maintableContext _maintableContext;
+        public NewsController(NewsContext context,maintableContext maintableContext)
         {
             _context = context;
+            _maintableContext = maintableContext;
         }
 
         // GET: api/News
@@ -42,14 +43,32 @@ namespace InformationServiceBackEnd.Controllers
         }
 
         // GET: api/News/Museum/
-        [HttpGet("Museum/{mname}")]
+  /*      [HttpGet("Museum/{mname}")]
         public async Task<ActionResult<IEnumerable<News>>> GetByUserid(string mname)
         {
             var news = await _context.News
                                 .Where(b => b.Museum == mname)
                                 .ToListAsync();
-
+        
             return news;
+        }*/
+
+        [HttpGet("One/{name}", Name = "GetByUseridInfor")]
+        public async Task<ActionResult<IEnumerable<News>>> GetByUseridInfor(string name)
+        {
+            
+            List<News> it2 = (from s1 in _context.News
+                             select s1).ToList();
+            List<News> it3 = (from s1 in _context.News
+                              where s1.Id == -1
+                              select s1).ToList();
+            foreach (News tx in it2)
+            {
+                if (tx.Museum == name)
+                    it3.Add(tx);
+            }
+            return it3;
+
         }
 
         // PUT: api/News/5
