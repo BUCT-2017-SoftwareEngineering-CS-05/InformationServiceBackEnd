@@ -45,7 +45,7 @@ namespace InformationServiceBackEnd.Controllers
                                                     select new
                                                     {
                                                         id = a.Key.key1,
-                                                        score = a.Average(x => x.exhscore)
+                                                        score = a.Sum(x => x.exhscore)
                                                     }
                                                     into te
                                                     orderby te.score descending
@@ -75,7 +75,7 @@ namespace InformationServiceBackEnd.Controllers
                                                     select new
                                                     {
                                                         id = a.Key.key1,
-                                                        score = a.Average(x => x.serscore)
+                                                        score = a.Sum(x => x.serscore)
                                                     }
                                                     into te
                                                     orderby te.score descending
@@ -105,7 +105,7 @@ namespace InformationServiceBackEnd.Controllers
                                                     select new
                                                     {
                                                         id = a.Key.key1,
-                                                        score = a.Average(x => x.envscore)
+                                                        score = a.Sum(x => x.envscore)
                                                     }
                                                     into te
                                                     orderby te.score descending
