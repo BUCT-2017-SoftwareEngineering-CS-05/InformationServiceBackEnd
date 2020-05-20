@@ -11,59 +11,59 @@ namespace InformationServiceBackEnd.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CollectionsController : ControllerBase
+    public class EducationsController : ControllerBase
     {
-        private readonly CollectionContext _context;
+        private readonly EducationContext _context;
 
-        public CollectionsController(CollectionContext context)
+        public EducationsController(EducationContext context)
         {
             _context = context;
         }
 
-        // GET: api/Collections
+        // GET: api/Educations
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Collection>>> GetCollection()
+        public async Task<ActionResult<IEnumerable<Education>>> GetEducation()
         {
-            return await _context.Collection.ToListAsync();
+            return await _context.Education.ToListAsync();
         }
 
-        // GET: api/Collections/5
+        // GET: api/Educations/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Collection>> GetCollection(int id)
+        public async Task<ActionResult<Education>> GetEducation(int id)
         {
-            var collection = await _context.Collection.FindAsync(id);
+            var education = await _context.Education.FindAsync(id);
 
-            if (collection == null)
+            if (education == null)
             {
                 return NotFound();
             }
 
-            return collection;
+            return education;
         }
 
-        // GET: api/Collections/midex/5
+        // GET: api/Educations/midex/5
         [HttpGet("midex/{id}")]
-        public async Task<ActionResult<IEnumerable<Collection>>> GetByUserid(int id)
+        public async Task<ActionResult<IEnumerable<Education>>> GetByUserid(int id)
         {
-            var collection = await _context.Collection
+            var education = await _context.Education
                                 .Where(b => b.midex == id)
                                 .ToListAsync();
 
-            return collection;
+            return education;
         }
 
-        // PUT: api/Collections/5
+        // PUT: api/Educations/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCollection(int id, Collection collection)
+        public async Task<IActionResult> PutEducation(int id, Education education)
         {
-            if (id != collection.midex)
+            if (id != education.midex)
             {
                 return BadRequest();
             }
 
-            _context.Entry(collection).State = EntityState.Modified;
+            _context.Entry(education).State = EntityState.Modified;
 
             try
             {
@@ -71,7 +71,7 @@ namespace InformationServiceBackEnd.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CollectionExists(id))
+                if (!EducationExists(id))
                 {
                     return NotFound();
                 }
@@ -84,20 +84,20 @@ namespace InformationServiceBackEnd.Controllers
             return NoContent();
         }
 
-        // POST: api/Collections
+        // POST: api/Educations
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Collection>> PostCollection(Collection collection)
+        public async Task<ActionResult<Education>> PostEducation(Education education)
         {
-            _context.Collection.Add(collection);
+            _context.Education.Add(education);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (CollectionExists(collection.midex))
+                if (EducationExists(education.midex))
                 {
                     return Conflict();
                 }
@@ -107,28 +107,28 @@ namespace InformationServiceBackEnd.Controllers
                 }
             }
 
-            return CreatedAtAction("GetCollection", new { id = collection.midex }, collection);
+            return CreatedAtAction("GetEducation", new { id = education.midex }, education);
         }
 
-        // DELETE: api/Collections/5
+        // DELETE: api/Educations/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Collection>> DeleteCollection(int id)
+        public async Task<ActionResult<Education>> DeleteEducation(int id)
         {
-            var collection = await _context.Collection.FindAsync(id);
-            if (collection == null)
+            var education = await _context.Education.FindAsync(id);
+            if (education == null)
             {
                 return NotFound();
             }
 
-            _context.Collection.Remove(collection);
+            _context.Education.Remove(education);
             await _context.SaveChangesAsync();
 
-            return collection;
+            return education;
         }
 
-        private bool CollectionExists(int id)
+        private bool EducationExists(int id)
         {
-            return _context.Collection.Any(e => e.midex == id);
+            return _context.Education.Any(e => e.midex == id);
         }
     }
 }

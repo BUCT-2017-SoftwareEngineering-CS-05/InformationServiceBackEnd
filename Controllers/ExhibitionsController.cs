@@ -27,6 +27,17 @@ namespace InformationServiceBackEnd.Controllers
             return await _context.Exhibition.ToListAsync();
         }
 
+        // GET: api/Exhibitions/midex/5
+        [HttpGet("midex/{id}")]
+        public async Task<ActionResult<IEnumerable<Exhibition>>> GetByUserid(int id)
+        {
+            var exhibition = await _context.Exhibition
+                                .Where(b => b.midex == id)
+                                .ToListAsync();
+
+            return exhibition;
+        }
+
         // GET: api/Exhibitions/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Exhibition>> GetExhibition(int id)
