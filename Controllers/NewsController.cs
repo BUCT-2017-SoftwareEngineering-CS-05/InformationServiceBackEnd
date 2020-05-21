@@ -56,7 +56,7 @@ namespace InformationServiceBackEnd.Controllers
         [HttpGet("One/{name}", Name = "GetByUseridInfor")]
         public async Task<ActionResult<IEnumerable<News>>> GetByUseridInfor(string name)
         {
-            
+
             List<News> it2 = (from s1 in _context.News
                              select s1).ToList();
             List<News> it3 = (from s1 in _context.News

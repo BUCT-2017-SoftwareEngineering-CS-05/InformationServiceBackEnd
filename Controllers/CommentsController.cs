@@ -27,6 +27,100 @@ namespace InformationServiceBackEnd.Controllers
             return await _context.Comment.ToListAsync();
         }
 
+        // GET: api/Comments/analysis1/{id}
+        [HttpGet("analysis1/{id}")]
+        public async Task<ActionResult<IEnumerable<analysis>>> Getanalysisone(int id)
+        {
+            List<Comment> itt1 = (from s2 in _context.Comment
+                                  where s2.midex == id
+                                  select s2).ToList();
+            int y1=0, y2=0, y3=0, y4=0, y5=0;
+            foreach(Comment t in itt1)
+            {
+                if (t.serscore == 1)
+                    y1++;
+                if (t.serscore == 2)
+                    y2++;
+                if (t.serscore == 3)
+                    y3++;
+                if (t.serscore == 4)
+                    y4++;
+                if (t.serscore == 5)
+                    y5++;
+            }
+            List<analysis> resu = new List<analysis>
+            {
+                new analysis(){X=1,Y=y1},
+                new analysis(){X=2,Y=y2},
+                new analysis(){X=3,Y=y3},
+                new analysis(){X=4,Y=y4},
+                new analysis(){X=5,Y=y5},
+            };
+            return resu;
+        }
+        // GET: api/Comments/analysis1/{id}
+        [HttpGet("analysis2/{id}")]
+        public async Task<ActionResult<IEnumerable<analysis>>> Getanalysistwo(int id)
+        {
+            List<Comment> itt1 = (from s2 in _context.Comment
+                                  where s2.midex == id
+                                  select s2).ToList();
+            int y1 = 0, y2 = 0, y3 = 0, y4 = 0, y5 = 0;
+            foreach (Comment t in itt1)
+            {
+                if (t.envscore == 1)
+                    y1++;
+                if (t.envscore == 2)
+                    y2++;
+                if (t.envscore == 3)
+                    y3++;
+                if (t.envscore == 4)
+                    y4++;
+                if (t.envscore == 5)
+                    y5++;
+            }
+            List<analysis> resu = new List<analysis>
+            {
+                new analysis(){X=1,Y=y1},
+                new analysis(){X=2,Y=y2},
+                new analysis(){X=3,Y=y3},
+                new analysis(){X=4,Y=y4},
+                new analysis(){X=5,Y=y5},
+            };
+            return resu;
+        }
+        // GET: api/Comments/analysis1/{id}
+        [HttpGet("analysis3/{id}")]
+        public async Task<ActionResult<IEnumerable<analysis>>> Getanalysisthree(int id)
+        {
+            List<Comment> itt1 = (from s2 in _context.Comment
+                                  where s2.midex == id
+                                  select s2).ToList();
+            int y1 = 0, y2 = 0, y3 = 0, y4 = 0, y5 = 0;
+            foreach (Comment t in itt1)
+            {
+                if (t.exhscore == 1)
+                    y1++;
+                if (t.exhscore == 2)
+                    y2++;
+                if (t.exhscore == 3)
+                    y3++;
+                if (t.exhscore == 4)
+                    y4++;
+                if (t.exhscore == 5)
+                    y5++;
+            }
+            List<analysis> resu = new List<analysis>
+            {
+                new analysis(){X=1,Y=y1},
+                new analysis(){X=2,Y=y2},
+                new analysis(){X=3,Y=y3},
+                new analysis(){X=4,Y=y4},
+                new analysis(){X=5,Y=y5},
+            };
+            return resu;
+        }
+
         // GET: api/Comments/userid/{userid}
         [HttpGet("userid/{id}")]
         public async Task<ActionResult<IEnumerable<Comment>>> GetByUserid(string id)
